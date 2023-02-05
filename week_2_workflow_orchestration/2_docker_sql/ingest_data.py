@@ -8,17 +8,17 @@ from sqlalchemy import create_engine
 
 
 
-df= pd.read_csv("yellow-tripdata-2021.csv", nrows=100)
+df= pd.read_csv("trips_data_all.csv", nrows=100)
 
 
 
-def main(params):
-    user = params.user
-    password = params.password
-    host = params.host 
-    port = params.port 
-    db = params.db
-    table_name = params.table_name
+def main():
+    user = "root"
+    password = "root"
+    host = "127.0.0.1" 
+    port = "5432"
+    db = "ny_taxi"
+    table_name = "yellow_taxi_trips"
     #url = params.url
     #csv_name = 'output.csv'
 
@@ -26,7 +26,7 @@ def main(params):
 #yellow-tripdata-2021.csv
     engine = create_engine(f'postgresql://{user}:{password}@{host}:{port}/{db}')
 
-    df_iter = pd.read_csv("yellow-tripdata-2021.csv", iterator=True, chunksize=100000)
+    df_iter = pd.read_csv("trips_data_all.csv", iterator=True, chunksize=100000)
 
     df = next(df_iter)
 
@@ -59,19 +59,19 @@ def main(params):
             break
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Ingest CSV data to Postgres')
+    # parser = argparse.ArgumentParser(description='Ingest CSV data to Postgres')
 
-    parser.add_argument('--user', required=True, help='user name for postgres')
-    parser.add_argument('--password', required=True, help='password for postgres')
-    parser.add_argument('--host', required=True, help='host for postgres')
-    parser.add_argument('--port', required=True, help='port for postgres')
-    parser.add_argument('--db', required=True, help='database name for postgres')
-    parser.add_argument('--table_name', required=True, help='name of the table where we will write the results to')
+    # parser.add_argument('--user', required=True, help='user name for postgres')
+    # parser.add_argument('--password', required=True, help='password for postgres')
+    # parser.add_argument('--host', required=True, help='host for postgres')
+    # parser.add_argument('--port', required=True, help='port for postgres')
+    # parser.add_argument('--db', required=True, help='database name for postgres')
+    # parser.add_argument('--table_name', required=True, help='name of the table where we will write the results to')
     #parser.add_argument('--url', required=True, help='url of the csv file')
 
-    args = parser.parse_args()
+   # args = parser.parse_args()
 
-    main(args)
+    main()
 
 # docker run -it \
 #   -e POSTGRES_USER="root" \
@@ -99,6 +99,8 @@ if __name__ == '__main__':
 # --port=5432 \
 # --db=ny_taxi \
 # --table_name=yellow_taxi_trips \
+
+
 
 
 
