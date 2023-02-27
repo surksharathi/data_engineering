@@ -1,0 +1,9 @@
+version: 2 
+
+sources:
+  - name: staging
+    database: pacific-formula-375906
+    schema: trips_data_all
+    tables:
+      - name: green_tripdata_2020-12
+      - name: yellow_tripdata_2020-12
